@@ -9,7 +9,7 @@ Modular Entry Point coordinating:
 """
 
 import streamlit as st
-
+import os
 import importlib
 from api_client import APIClient
 import styles
@@ -42,7 +42,10 @@ if "execution_state" not in st.session_state:
 if "blueprint_result" not in st.session_state:
     st.session_state.blueprint_result = None
 if "api_url" not in st.session_state:
-    st.session_state.api_url = "http://localhost:8000"
+    st.session_state.api_url = os.getenv(
+        "MINDMESH_API_URL",
+        "http://localhost:8000"
+    )
 if "error_message" not in st.session_state:
     st.session_state.error_message = ""
 if "form_data" not in st.session_state:
